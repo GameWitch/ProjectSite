@@ -1,4 +1,6 @@
-g_maps = googlemaps.Client("AIzaSyANp7sVncdFiSj4-DJBrqIZLxPAumlBju8")
+import os
+
+g_maps = googlemaps.Client(os.environ['GOOGLE_API'])
 
 def query_to_list_of_dicts(query_object):
     list_of_dicts = []

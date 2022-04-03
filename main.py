@@ -2,6 +2,7 @@ from datetime import datetime, date
 from functools import wraps
 import pandas
 import smtplib
+from os import environ
 from email.message import EmailMessage
 from flask import Flask, render_template, redirect, url_for, flash, abort
 from flask_bootstrap import Bootstrap
@@ -18,7 +19,7 @@ from forms import CreatePostForm, RegisterForm, LoginForm, CommentForm, Landlord
 
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = '8BYkEfBA6O6donzWlSihBXox7C0sKR6b'
+app.config['SECRET_KEY'] = environ['SECRET_KEY']
 ckeditor = CKEditor(app)
 Bootstrap(app)
 
@@ -113,15 +114,14 @@ prop_records = pandas.read_excel('static/xcel/currentproperties.xlsx').to_dict('
 def send_email(email_address, name, email_content):
     email = EmailMessage()
     email['from'] = email_address
-    email['to'] = 'dmactavishf@gmail.com'
+    email['to'] = environ['MY_EMAIL']
     email['subject'] = name
     email.set_content("<body>" + name + " " + " " + email_content + "</body>")
     with smtplib.SMTP(host='smtp.gmail.com', port=587) as smtp:
         smtp.ehlo()
         smtp.starttls()
-        smtp.login('pythong69emailer420@gmail.com', 'lmdt42069')
+        smtp.login(environ['MAILER'], environ['MAILER_PASSWORD'])
         smtp.send_message(email)
-
 
 def make_list_items_strings(list_object):
     new_list = []
