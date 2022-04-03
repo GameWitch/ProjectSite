@@ -1,0 +1,27 @@
+{% include "header.html" %}
+
+    <meta name='robots' content='noindex, nofollow'>
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700' rel='stylesheet'>
+    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.js'></script>
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.css' rel='stylesheet' />
+    <link rel='stylesheet' href='{{ url_for("static", filename="css/mapstyle.css") }}'>
+  </head>
+  <body>
+    <div class='sidebar'>
+      <div class='heading'>
+        <h1>owned properties</h1>
+      </div>
+      <div id='listings' class='listings'></div>
+    </div>
+    <div id='map' class='map'></div>
+    <script> var stores = JSON.parse('{{addresses | tojson | safe}}'); </script>
+    <!-- Bootstrap core JavaScript -->
+  <script src="{{ url_for('static', filename='vendor/jquery/jquery.min.js')}}"></script>
+  <script src="{{ url_for('static', filename='vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+
+  <!-- Custom scripts for this template -->
+  <script src="{{ url_for('static', filename='js/maplogic.js')}}"></script>
+  <script src="{{ url_for('static', filename='js/clean-blog.min.js')}}"></script>
+  </body>
+</html>

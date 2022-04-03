@@ -1,0 +1,78 @@
+{% include "header.html" %}
+
+  <!-- Page Header -->
+  <header class="masthead" style="background-image: url('{{ url_for('static', filename='img/ginger.png')}}')">
+    <div class="overlay"></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+          <div class="site-heading">
+            {% if current_user.is_authenticated %}
+            <h1>Welcome {{ current_user.name }}</h1>
+            {% else %}
+            <h1>Welcome</h1>
+            {% endif %}
+            <span class="subheading">I wanna party with you</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+
+  <div class="container">
+    <div class="row">
+
+      {% with messages = get_flashed_messages() %}
+        {% if messages %}
+          <div class="col-lg-8 col-md-10 mx-auto content">
+            <ul>
+              {% for message in messages %}
+                <p>{{message}}</p>
+              {% endfor %}
+            </ul>
+          </div>
+        {% endif %}
+      {% endwith %}
+  <div class="col-lg-8 col-md-10 mx-auto">
+    <p> This is just a place for me to showacse projects and talk a little bit about them</p>
+  </div>
+
+      <div class="col-lg-8 col-md-10 mx-auto">
+        {% for post in all_posts %}
+        <div class="post-preview">
+          <a href="{{ url_for('show_post', post_id=post.id) }}">
+            <h2 class="post-title">
+              {{post.title}}
+            </h2>
+            <h3 class="post-subtitle">
+              {{post.subtitle}}
+            </h3>
+          </a>
+          <p class="post-meta">Posted by
+            <a href="#">{{post.author.name}}</a>
+            on {{post.date}}
+
+            {% if current_user.id == 1 %}
+            <a href="{{url_for('delete_post', post_id=post.id) }}">✘</a>
+            {% endif %}
+
+          </p>
+        </div>
+        <hr>
+        {% endfor %}
+
+
+        <!-- New Post -->
+        <div class="clearfix">
+          {% if current_user.id == 1 %}
+            <a class="btn btn-primary float-right" href="{{url_for('add_new_post')}}">Create New Post</a>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+  <hr>
+
+{% include "footer.html" %}
