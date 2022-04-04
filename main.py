@@ -107,8 +107,8 @@ class Location(db.Model):
 
 # set up database and property records
 db.create_all()
-prop_records = pandas.read_excel('static/xcel/currentproperties.xlsx').to_dict('records')
-
+# prop_records = pandas.read_excel('static/xcel/currentproperties.xlsx').to_dict('records')
+prop_records = None
 
 # Regular Functions
 def send_email(email_address, name, email_content):
