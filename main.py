@@ -16,12 +16,13 @@ from sqlalchemy.orm import relationship
 from werkzeug.security import generate_password_hash, check_password_hash
 from werkzeug.utils import secure_filename
 from forms import CreatePostForm, RegisterForm, LoginForm, CommentForm, LandlordForm, UpdateLandlordForm, ContactForm
-
+import pprint
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = environ['SECRET_KEY']
 ckeditor = CKEditor(app)
 Bootstrap(app)
+
 
 # CONNECT TO DB
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///blog.db'
