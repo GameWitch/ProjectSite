@@ -25,7 +25,11 @@ Bootstrap(app)
 
 
 # CONNECT TO DB
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///blog.db'
+
+# local database
+# app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///blog.db'
+# if deployed use postgre database url if not use local database
+app.config['SQLALCHEMY_DATABASE_URI'] = environ.get('DATABASE_URL', 'sqlite:///blog.db')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
