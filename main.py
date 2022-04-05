@@ -110,6 +110,7 @@ db.create_all()
 # prop_records = pandas.read_excel('static/xcel/currentproperties.xlsx').to_dict('records')
 prop_records = None
 
+
 # Regular Functions
 def send_email(email_address, name, email_content):
     email = EmailMessage()
@@ -122,6 +123,7 @@ def send_email(email_address, name, email_content):
         smtp.starttls()
         smtp.login(environ['MAILER'], environ['MAILER_PASSWORD'])
         smtp.send_message(email)
+
 
 def make_list_items_strings(list_object):
     new_list = []
