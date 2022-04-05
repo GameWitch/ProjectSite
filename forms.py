@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, PasswordField, MultipleFileField, SelectField, FileField
-from wtforms.validators import DataRequired, URL, Email, Length, Regexp
+from wtforms.validators import DataRequired, URL, Length, Regexp
 from flask_ckeditor import CKEditorField
 
 
@@ -17,13 +17,13 @@ class CreatePostForm(FlaskForm):
 
 class ContactForm(FlaskForm):
     name = StringField("Name", validators=[DataRequired()])
-    email = StringField("E-mail Address", validators=[DataRequired(), Email()])
+    email = StringField("E-mail Address", validators=[DataRequired()])
     body = CKEditorField("Message", validators=[DataRequired()])
     submit = SubmitField("Send Message")
 
 
 class RegisterForm(FlaskForm):
-    email = StringField("email", validators=[DataRequired(), Email()])
+    email = StringField("email", validators=[DataRequired()])
     password = PasswordField("password", validators=[DataRequired(),
                                                      Length(min=8, message="Password must be at least 8 characters long"),
                                                      Regexp("(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*\W)",
@@ -37,7 +37,7 @@ class RegisterForm(FlaskForm):
 
 
 class LoginForm(FlaskForm):
-    email = StringField("email", validators=[DataRequired(), Email()])
+    email = StringField("email", validators=[DataRequired()])
     password = PasswordField("password", validators=[DataRequired()])
     submit = SubmitField("Log in.")
 
