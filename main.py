@@ -111,7 +111,6 @@ db.create_all()
 prop_records = pandas.read_excel('static/xcel/currentproperties.xlsx').to_dict('records')
 
 
-
 # Regular Functions
 def send_email(email_address, name, email_content):
     email = EmailMessage()
