@@ -61,7 +61,10 @@ def make_address_location_xcel():
         site_nbr = prop["SITE_NBR"]
         if type(site_nbr) == float:
             site_nbr = str(int(prop["SITE_NBR"]))
-        address = " ".join([site_nbr, prop["SITE_DIR"], prop["SITE_NAME"], prop["SITE_MODE"]])
+        address = " ".join([site_nbr,
+                            prop["SITE_DIR"],
+                            prop["SITE_NAME"],
+                            prop["SITE_MODE"]])
         dict_of_lists["address"].append(address)
         dict_of_lists["lattitude"].append(prop["site_lat"])
         dict_of_lists["longitude"].append(prop["site_long"])
@@ -88,7 +91,6 @@ def load_db_to_xl():
 
 def load_locations():
     data = pandas.read_excel('addresslocations.xlsx')
-
     properties = data.to_dict('records')
     for record in properties:
         for key in record:

@@ -115,6 +115,28 @@ db.create_all()
 prop_records = pandas.read_excel('static/xcel/currentproperties.xlsx').to_dict('records')
 
 
+def populate_location_database():
+    data = pandas.read_excel('static/xcel/addresslocations.xlsx')
+    properties = data.to_dict('records')
+    for record in properties:
+        for key in record:
+            if record[key] is None:
+                record[key] = ""
+            elif pandas.isna(record[key]):
+                record[key] = ""
+        location = Location(address=record["address"],
+                            lattitude=record["lattitude"],
+                            longitude=record["longitude"]
+                            )
+        db.session.add(location)
+    db.session.commit()
+
+
+# if the database gets deleted
+if not Location.query.first():
+    populate_location_database()
+
+
 # Regular Functions
 def send_email(email_address, name, email_content):
     email = EmailMessage()
